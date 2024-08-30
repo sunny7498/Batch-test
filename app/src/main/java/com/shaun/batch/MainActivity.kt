@@ -91,8 +91,8 @@ class BatchedOrderLoader : Loader<Int, Int> {
 
     override suspend fun loadByIds(ids: Set<Int>): Map<Int, Int> {
         return withContext(Dispatchers.IO) {
-            Thread.sleep(rand.nextLong(10, 30))
-            ids.map { it to it }.toMap()
+          val orders =   getOrders(ids.toList())
+            return@withContext orders.map { it to it }.toMap()
         }
     }
 }
